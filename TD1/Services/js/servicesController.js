@@ -14,7 +14,7 @@ angular.module("servicesApp").controller("servicesController",[function(){
         service.active=!service.active;
     };
 
-    this.total=function(){
+    this.total=function(service){
         this.servicesCount=0;
         this.montant=0;
         angular.forEach(this.service,function(service){
@@ -27,7 +27,7 @@ angular.module("servicesApp").controller("servicesController",[function(){
         return this.montant;
     }
 
-    this.active=function(){
+    this.active=function(service){
         this.servicesCount=0;
         angular.forEach(this.service,function(service){
             if(service.active==true){

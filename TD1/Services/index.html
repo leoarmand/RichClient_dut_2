@@ -21,7 +21,7 @@
                 data-ng-click="ctrl.toggleActive(service)">{{service.name}} - {{service.price | currency}}</li>
         </ul>
     </div>
-    <div class="panel-footer">Total : {{ctrl.total(service)}}</div>
+    <div class="panel panel-footer">Total : {{ctrl.total()}}</div>
 
     <div data-ng-controller="servicesController as ctrlServices">
         <div data-ng-repeat="promo in ctrlServices.promos"></div>
@@ -29,8 +29,12 @@
 </div>
 <div class="panel panel-default">
     <div class="container">
-        
+        <div class="col-xs-2">
+            <label for="code">Code promo</label>
+            <input data-ng-model="">
+        </div>
     </div>
 </div>
+<div class="panel panel-footer">Total avec remise :</div>
 </body>
 </html>

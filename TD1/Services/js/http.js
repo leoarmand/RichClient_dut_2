@@ -8,12 +8,11 @@ controller(["http",function(http){
     http.get("promo.json").then(function(response){
         self.promos=response.data;
     });
-    
-    this.test= function(p){
-        alert(p);
-    }
 
     this.getRemise=function(){
-        return this.promos[this.codeR];
+        var remise = this.promos[this.codeR];
+        if(angular.isUndefined(remise)){
+            remise = "Code promo non valide";
+        }
     }
 }])
