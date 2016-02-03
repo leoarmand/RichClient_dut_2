@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr" data-ng-app="servicesApp">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../required/bootstrap.min.css">
+    <script src="../required/angular.min.js"></script>
+    <script src="js/servicesApp.js"></script>
+    <script src="js/servicesController.js"></script>
+    <script src="js/fr.js"></script>
+    <title>Ex2 : Choix de services</title>
+</head>
+<body data-ng-controller="servicesController as ctrl" style="text-align: center">
+<div class="panel panel-default">
+    <div class="panel-heading">Services</div>
+    <div class="panel-body">Choisissez les éléments à inclure</div>
+    <div data-ng-repeat="service in ctrl.services">
+        <ul class="nav nav-tabs">
+            <li data-ng-class="{'alert-warning': service.active==true , 'alert-warning': service.active==false}"><a href="#">{{service.name}} - {{service.price | currency}}</li>
+        </ul>
+    </div>
+    <div class="panel-footer">Total : {{ctrl.montant}}</div>
+</body>
+</html>
