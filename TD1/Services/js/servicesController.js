@@ -1,7 +1,7 @@
 /**
  * Created by Léo on 27/01/2016.
  */
-//Ajout d'un controller sur le module myApp
+//Ajout d'un controller sur le module servicesApp
 angular.module("servicesApp").controller("servicesController",[function(){
     this.services =
         [
@@ -17,13 +17,24 @@ angular.module("servicesApp").controller("servicesController",[function(){
     this.total=function(){
         this.servicesCount=0;
         this.montant=0;
-        angular.forEach(function(service){
+        angular.forEach(this.service,function(service){
             if(service.active==true){
                 this.servicesCount++;
-                this.montant+=service.price;
+                this.montant = service.price;
             }
         });
+
+        return this.montant;
     }
 
+    this.active=function(){
+        this.servicesCount=0;
+        angular.forEach(this.service,function(service){
+            if(service.active==true){
+                this.servicesCount++;
+            }
+        });
 
+        return this.servicesCount;
+    }
 }]);

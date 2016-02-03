@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../required/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="../required/angular.min.js"></script>
     <script src="js/servicesApp.js"></script>
+    <script src="js/http.js"></script>
     <script src="js/servicesController.js"></script>
     <script src="js/fr.js"></script>
     <title>Ex2 : Choix de services</title>
@@ -12,12 +14,23 @@
 <body data-ng-controller="servicesController as ctrl" style="text-align: center">
 <div class="panel panel-default">
     <div class="panel-heading">Services</div>
-    <div class="panel-body">Choisissez les éléments à inclure</div>
+    <div class="panel-body">Choisissez les éléments à inclure :<br>{{ctrl.active()}} services sélectionnés</div>
     <div data-ng-repeat="service in ctrl.services">
         <ul class="nav nav-tabs">
-            <li data-ng-class="{'alert-warning': service.active==true , 'alert-warning': service.active==false}"><a href="#">{{service.name}} - {{service.price | currency}}</li>
+            <li style="width:300px;" data-ng-class="{'btn btn-success': service.active==true , 'btn btn-primary': service.active==false}"
+                data-ng-click="ctrl.toggleActive(service)">{{service.name}} - {{service.price | currency}}</li>
         </ul>
     </div>
-    <div class="panel-footer">Total : {{ctrl.montant}}</div>
+    <div class="panel-footer">Total : {{ctrl.total(service)}}</div>
+
+    <div data-ng-controller="servicesController as ctrlServices">
+        <div data-ng-repeat="promo in ctrlServices.promos"></div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="container">
+        
+    </div>
+</div>
 </body>
 </html>
