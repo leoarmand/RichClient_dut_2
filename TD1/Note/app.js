@@ -1,3 +1,1 @@
-/**
- * Created by leo on 10/02/16.
- */
+angular.module('NoteApp', []);
