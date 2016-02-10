@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" data-ng-app="NoteApp" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="../../required/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="noteController.js"></script>
+    <title>Ex1 : Note d'application</title>
+</head>
+<body data-ng-controller="NoteController as note">
+<br>
+<div class='alert alert-warning'>Attention, pour pouvoir fonctionner correctement, cette application doit intégrer les librairies suivantes :
+    <ul>
+        <li>Twitter bootstrap css</li>
+        <li>angularJS main file</li>
+    </ul>
+
+</div>
+<div class="container" id="note">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Ex 1 : Note Application</div>
+        <div class="panel-body">
+            <div data-ng-controller="NoteController as note" class="form-group">
+                <p><label for="message">Note :</label>
+                    <textarea data-ng-change="note.updateInfo()" name="message" id="message" data-ng-model="note.message" cols="40" rows="5" class="form-control" maxlength="100"></textarea>
+                </p>
+                <p>
+                    <button data-ng_click="note.save()" class="btn btn-primary">Enregistrer</button>
+                    <button data-ng-click="note.clear()" class="btn btn-primary">Effacer</button>
+                </p>
+
+                <div ng-class="{'alert-info':note.status==1,'alert-warning':note.status==2,'alert-danger':note.status==3,'alert-success':note.status==0}" class="alert alert-info alert-dismissible" role="alert">Nombre de caractères restant : <span data-ng-bind="note.count()"></span></div>
+                <div ng-class="note.status==1 ? 'alert-info' : 'alert-success'}" class="alert alert-info alert-dismissible" role="alert" data-ng-show="note.info">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="note.info=''"><span aria-hidden="true">&times;</span></button>
+                    <span>{{note.info}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
