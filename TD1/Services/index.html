@@ -1,40 +1,47 @@
 <!DOCTYPE html>
-<html lang="fr" data-ng-app="servicesApp">
+<html lang="fr" data-ng-app="myApp" xmlns:margin-top="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../required/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="../required/angular.min.js"></script>
-    <script src="js/servicesApp.js"></script>
-    <script src="js/http.js"></script>
-    <script src="js/servicesController.js"></script>
-    <script src="js/fr.js"></script>
-    <title>Ex2 : Choix de services</title>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Choix des services</title>
+    <script src="../../required/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="myController.js"></script>
 </head>
-<body data-ng-controller="servicesController as ctrl" style="text-align: center">
-<div class="panel panel-default">
-    <div class="panel-heading">Services</div>
-    <div class="panel-body">Choisissez les éléments à inclure :<br>{{ctrl.active()}} services sélectionnés</div>
-    <div data-ng-repeat="service in ctrl.services">
-        <ul class="nav nav-tabs">
-            <li style="width:300px;" data-ng-class="{'btn btn-success': service.active==true , 'btn btn-primary': service.active==false}"
-                data-ng-click="ctrl.toggleActive(service)">{{service.name}} - {{service.price | currency}}</li>
-        </ul>
-    </div>
-    <div class="panel panel-footer">Total : {{ctrl.total()}}</div>
+<body>
+<form ng-controller="myController as ctrl">
 
-    <div data-ng-controller="servicesController as ctrlServices">
-        <div data-ng-repeat="promo in ctrlServices.promos"></div>
+    <h1>Services</h1>
+    <div class="alert alert-info">
+        <span>Choisissez les éléments à inclure</span>
+        <p>
+            <ng-pluralize count="ctrl.count" when="{0:'Aucun service sélectionné',
+											1:'1 service sélectionné',
+											'other':'{} services sélectionnés'}"></ng-pluralize>
+        </p>
     </div>
-</div>
-<div class="panel panel-default">
-    <div class="container">
-        <div class="col-xs-2">
-            <label for="code">Code promo</label>
-            <input data-ng-model="">
+    <ul>
+        <li ng-repeat="service in ctrl.services" ng-click="ctrl.toggleActive(service)" ng-class="{active:service.active}">
+            {{service.name}} <span>{{service.price | currency}}</span>
+        </li>
+    </ul>
+
+    <div class="total">
+        <!-- Format en currency. -->
+        Total: <span>{{ctrl.total() | currency}}</span>
+    </div>
+    <div>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" aria-label="..." ng-model="ctrl.ckPromo" ng-click="ctrl.applyCode()">
+      </span>
+            <input type="text" class="form-control" aria-label="..." ng-model="ctrl.codePromo" placeholder="Code promo" ng-keyup="ctrl.applyCode()">
         </div>
     </div>
-</div>
-<div class="panel panel-footer">Total avec remise :</div>
+    <div class="total" ng-show="ctrl.ckPromo&&ctrl.codePromo">
+        Remise :<span ng-if="ctrl.IsNumeric(ctrl.remise)">{{ctrl.remise | currency}}</span><span ng-if="!ctrl.IsNumeric(ctrl.remise)">{{ctrl.remise}}</span><br>
+        Total avec remise :<span>{{ctrl.total()-ctrl.remise | currency}}</span>
+    </div>
+</form>
 </body>
 </html>
