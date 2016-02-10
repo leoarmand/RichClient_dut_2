@@ -2,6 +2,7 @@
 <html lang="fr" data-ng-app="mainApp">
 <head>
     <meta charset="UTF-8">
+    <title>Choix des produits</title>
     <link rel="stylesheet" href="../../required/bootstrap.min.css">
     <script src="../../required/angular.min.js"></script>
     <script src="RouteController.js"></script>
@@ -15,14 +16,52 @@
             <div data-ng-show="step==1">
                 <h1>Sélectionnez vos produits</h1>
                 <div class="form-group">
-                    <div class="inline-block">
+                    <div class="inline-block" style="display: inline-block;">
                         <label>
                             "Produits disponible : "
                             <select title="Double-cliquez pour ajouter" class="form-control ng-pristine ng-untouched ng-valid"
-                                    data-ng-model="selectedDispoItem" ng-dblclick="selectItem()"
+                                    data-ng-model="selectedDispoItems" ng-dblclick="selectItem()"
                                     ng-options="item.title for item in dispoItems" size="10" multiple="multiple">
                             </select>
                         </label>
+                    </div>
+                    <div class="inline-block" style="display: inline-block; width: 200px; height: 200px;">
+                        <div title="Ajouter" class="btn btn-primary list-btn" data-ng-click="addToIncluded()" ng-disabled="selectedDispoItems.length<1" disabled="disabled" style="display: block;">
+                            <span aria-hidden="true" class="glyphicon glyphicon-step-forward"></span>
+                        </div>
+                        <div title="Ajouter tout" class="btn btn-primary list-btn" data-ng-click="addAllToIncluded()" ng-disabled="dispoItems.length<1" style="display: block;">
+                            <span aria-hidden="true" class="glyphicon glyphicon-fast-forward"></span>
+                        </div>
+                        <div title="Retirer" class="btn btn-primary list-btn" data-ng-click="removeFromIncluded()" ng-disabled="dispoItems.length<1" disabled="disabled" style="display: block;">
+                            <span aria-hidden="true" class="glyphicon glyphicon-step-backward"></span>
+                        </div>
+                        <div title="Retirer tous" class="btn btn-primary list-btn" data-ng-click="removeAllFromIncluded()" ng-disabled="includedItems.length<1" disabled="disabled" style="display: block;">
+                            <span aria-hidden="true" class="glyphicon glyphicon-fast-backward"></span>
+                        </div>
+                    </div>
+                    <div class="inline-block" style="display: inline-block;">
+                        <label>
+                            "Produits à inclure : "
+                            <select title="Double-cliquez pour ajouter" class="form-control ng-pristine ng-untouched ng-valid"
+                                    data-ng-model="selectedIncludedItems" ng-dblclick="deselectItem()"
+                                    ng-options="item.title for item in includedItems" size="10" multiple="multiple">
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn btn-primary" style="width: 98%;text-align: right;" data-ng-click="step==2" ng-disabled="includedItems.length<1" disabled="disabled">
+                        <span>Etape suivante</span>
+                        <span aria-hidden="true" class="glyphicon glyphicon-circle-arrow-right"></span>
+                    </div>
+                </div>
+            </div>
+            <div data-ng-show="step==2" class="ng-hide">
+                <h1>Votre choix</h1>
+                <ul></ul>
+                <div>
+                    <div class="btn btn-primary" style="width: 98%;text-align: right;margin-top: 5px;" data-ng-click="step=1">
+                        <span aria-hidden="true" class="glyphicon glyphicon-circle-arrow-left">Retour au choix précédent</span>
                     </div>
                 </div>
             </div>
