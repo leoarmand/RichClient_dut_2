@@ -1,4 +1,4 @@
-<pre class='code-toolbar line-numbers'><code class='language-css'>@CHARSET "UTF-8";
+@CHARSET "UTF-8";
 .alert {
     transition: 1s linear all;
      opacity: 1;
@@ -6,4 +6,3 @@
 .alert.ng-hide {
      opacity: 0;
 }
-</code></pre>

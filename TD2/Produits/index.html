@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr" data-ng-app="mainApp" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+<html lang="fr" data-ng-app="mainApp">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../required/bootstrap.min.css">
     <script src="../../required/angular.min.js"></script>
+    <script src="RouteController.js"></script>
     <script src="app.js"></script>
-    <script src="angular-route.min.js"></script>
     <title>Ex3</title>
 </head>
 <body data-ng-controller="RouteController" class="ng-scope">
@@ -19,11 +19,8 @@
                         <label>
                             "Produits disponible : "
                             <select title="Double-cliquez pour ajouter" class="form-control ng-pristine ng-untouched ng-valid"
-                                    data-ng-model="selectedDispoItems" ng-dblclick="selectItem()"
+                                    data-ng-model="selectedDispoItem" ng-dblclick="selectItem()"
                                     ng-options="item.title for item in dispoItems" size="10" multiple="multiple">
-                                <option>
-                                    {{item.title}}
-                                </option>
                             </select>
                         </label>
                     </div>
